@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/tourism.css" />
+    <title></title>
+
+</head>
+<body>
+    <div class="container">
+
+        <h1> Montreal-Tourism</h1>
+        <h2> A trip evaluator for visit</h2>
+        <form class="tourism" name="tourism" onsubmit="return validate_user()" action="" method="post">
+            <table>
+
+                <tr>
+                    <td>Visitor name:*</td>
+                    <td><input id="name" type="text" name="name" size="30" maxlength="50" placeholder="your name" /></td>
+                </tr>
+
+                <tr>
+                    <td>Sex:*</td>
+                    <td>
+                        <input id="sm" type="radio" name="sex" value="Male" />
+                        <label for="sm">Male</label> <br />
+                        <input id="sf" type="radio" name="sex" value="Female" />
+                        <label for="sf">Female</label> <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Age:*</td>
+                    <td><input id="age" type="text" name="age" size="5" maxlength="5" /><b> years</b></td>
+                    
+                </tr>
+
+                <tr>
+                    <td>Phone:*</td>
+                    <td><input id="phone" type="text" name="phone" size="19" maxlength="19" placeholder="nn-(nnn)-nnn-nnnn" /></td>
+                </tr>
+
+                <tr>
+
+                    <td>Number:</td>
+                    <td>
+                        <select name="number:">
+                            <option value="1" selected="selected">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+
+                        </select>
+                        <b> Persons </b>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>Duration:</td>
+                    <td>
+                        <select name="Duration:">
+                            <option value="1" selected="selected">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+
+                        </select>
+                        <b>Durations</b>
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>Hotel:</td>
+                    <td>
+                        <select name="Hotel:">
+                            <option value="1">1 star</option>
+                            <option value="2">2 stars</option>
+                            <option value="3" selected="selected">3 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="5">5 stars</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="type">
+                    <td>
+                        Room Type:
+                    </td>
+                    <td class=" mult">
+                        <select name="Room" size="3" multiple="multiple">
+                            <option value="s_room">Single room</option>
+                            <option value="s_suite" selected="selected">Semi-suite</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Activities:</td>
+                    <td>
+                        <input id="bus" type="checkbox" name="City-bus-tours Can$ 20" value="OK" onchange="disableEnableElementBus()"  />
+                        <label for="bus">City-bus-tours Can$ 20</label> <br />
+                        <input id="manage" type="checkbox" name="Spa-Manage Can$ 100" value="OK" />
+                        <label for="manage">Spa-Manage Can$ 100</label> <br />
+                        <input id="sport" type="checkbox" name="Sport Event Can$ 150" value="OK" onchange="disableEnableElementSport()" />
+                        <label for="sport">Sport Event Can$ 150</label><br />
+                    </td>
+                </tr>
+            </table>
+
+            <button class="submit" type="submit" name="Evaluate" value="submit">Evaluate</button>
+            <button class="reset" type="reset">Reset</button>
+
+        </form>
+    </div>
+    <script>
+        var busCheckbox = document.getElementById("bus");
+        var sportCheckbox = document.getElementById("sport");
+
+        function disableEnableElementBus() {
+
+            if (busCheckbox.checked) {
+                sportCheckbox.disabled = true;
+            }
+            else {
+                sportCheckbox.disabled = false;
+            }
+        }
+        function disableEnableElementSport() {
+
+            if (sportCheckbox.checked) {
+                busCheckbox.disabled = true;
+            }
+            else {
+                busCheckbox.disabled = false;
+              
+            }
+
+        }
+   
+            function validate_user() {
+                var n = document.forms["tourism"]["name"].value;
+                if (n == "") {
+                    alert("Name must be filled out");
+                    return false;
+                }
+                else {
+                    if (!(/^[ ]*[A-Z]([a-z]|(([ ]+|-)[A-Z]))*[ ]*$/.test(n))) {
+                        alert("Invalid name");
+                        return false;
+                    }
+                    else {
+                        document.forms["tourism"]["name"].value = n.replace(/[ ][ ]+/g, ' ').replace(/(^[ ])|([ ]$)/g, '');
+                        var sex = document.forms["tourism"]["sex"];
+                        if (!(sex[0].checked || sex[1].checked)) {
+                            alert("Sex must be chosen.");
+                            return false;
+                        }
+                        else {
+                            var age = document.forms["tourism"]["age"].value;
+                            var num = parseInt(age)
+                            if (!(num >= 18 && num <= 110)) {
+                                alert("Age is invalid.");
+                                return false;
+                            }
+                            else {
+
+                                var phone = document.forms["tourism"]["phone"].value;
+
+                                if (!(/^\d{1,3}-\(\d{3}\)-\d{3}-\d{4}$/.test(phone))) {
+                                    alert("invalid phone number");
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+    </script>
+
+</body>
+</html>
